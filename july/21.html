@@ -1,0 +1,100 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #333;
+        font-family: 'Josefin Sans';
+      }
+      .container {
+        position: relative;
+        width: 50%;
+        margin: 25%;
+      }
+      .text {
+        padding-left: 110px;
+        display: none;
+        font-size: 48px;
+        color: #966;
+      }
+      .use {
+        position: absolute;
+        top: 3px;
+        left: 25px;
+      }
+      .annotation {
+        font-size: 22px;
+        position: absolute;
+        bottom: 50;
+        right: 50;
+        color: #855;
+        text-decoration: none;
+        display: none;
+      }
+      .annotation:hover {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="text">
+        <span class="use">  Use</span> people<span class="comma">, </span>
+        <span class="love">love</span><span class="things"> things.</span>
+      </header>
+    </div>
+    <a href="http://www.nytimes.com/2014/07/20/opinion/sunday/arthur-c-brooks-love-people-not-pleasure.html" class="annotation">The liberal propaganda that got me thinking</a>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var container = $('.container');
+        var use = $('.use');
+        var love = $('.love');
+        var things = $('.things');
+        var comma = $('.comma');
+        container.css('margin-top', window.innerHeight / 2 - 24 + "px");
+        $('.text').fadeIn(300, function() {
+          fadeOut(use, 1000, function() {
+            fadeOut(things, 1000, function() {
+              use.text('Love');
+              use.css('left', 0);
+              fadeIn(use, 1000, function() {
+              fadeOut(comma, 1000);
+                fadeOut(love, 1000, function() {
+                  love.text(' use');
+                  fadeIn(comma, 1000);
+                  fadeIn(things, 1000);
+                  fadeIn(love, 1500, function() {
+                    $('.container').animate({
+                      margin: 50
+                    }, 400);
+                    $('.annotation').fadeIn();
+                  });
+                });
+              });
+            });
+          });
+        });
+
+        var fadeOut = function(el, duration, callback) {
+          el.animate({
+            opacity: 0
+          }, duration, callback);
+        };
+
+        var fadeIn = function(el, duration, callback) {
+          el.animate({
+            opacity: 1,
+          }, duration, callback);
+        };
+
+      });
+    </script>
+  </body>
+</html>
