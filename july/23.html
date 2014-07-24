@@ -1,0 +1,71 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #333;
+        font-family: 'Raleway', sans-serif;
+      }
+      .container {
+        position: relative;
+        width: 50%;
+        margin: 25%;
+        display: none;
+      }
+      .neon {
+        font-size: 128px;
+        color: #D7D;
+        text-shadow: #D4D 8px 8px 20px,
+                     #D5D 0 0 5px,
+                     #D4D -4px -4px 10px,
+                     #F3D 0 0 3px,
+                     #F9D 0 -2px 2px,
+                     #F9D -1px 0 2px,
+                     #D9D 1px 0 3px;
+      }
+      .annotation {
+        font-size: 22px;
+        position: absolute;
+        bottom: 50;
+        right: 50;
+        color: #858;
+        text-decoration: none;
+        display: none;
+      }
+      .annotation:hover {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="neon">
+        EBOLA
+      </span>
+    </div>
+    <a href="http://www.reuters.com/article/2014/07/23/ozatp-uk-health-ebola-africa-idAFKBN0FS10V20140723" class="annotation">What about the three nurses though?</a>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var container = $('.container');
+
+        container.css('margin-top', window.innerHeight / 2 - 128 + "px");
+        container.fadeIn(600);
+
+        setTimeout(function() {
+          $('.annotation').fadeIn();
+          container.animate({
+            margin: '100px'
+          }, 500);
+        }, 3000);
+
+      });
+    </script>
+  </body>
+</html>
