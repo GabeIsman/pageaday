@@ -1,0 +1,65 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Cinzel:900' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #222;
+        font-family: 'Cinzel', sans-serif;
+      }
+      .container {
+      }
+      .text {
+        color: #ccc;
+        font-size: 80px;
+        text-decoration: none;
+        opacity: 0;
+      }
+      .link, .link:hover, .link:visited {
+        color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="text">
+        In a world...
+      </span>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var container = $('.container');
+        container.css('margin-top', window.innerHeight / 2 - 24 + "px");
+        var text = $('.text');
+        var strings = [
+          'In a world...',
+          'Where mothers are hacked...',
+          'For answering the phone...',
+          'One son...',
+          'Does what he must...',
+        ];
+        var index = 0;
+        var movieText = function() {
+          if (!strings[index]) {
+            $('body').css({backgroundColor: '#500'});
+            text.text('MOTHERHACKER');
+            text.css({opacity: 1});
+            return;
+          }
+          text.css({marginLeft: 0});
+          text.text(strings[index]);
+          index++;
+          text.animate({marginLeft: '150px', opacity: 0.8}, 1500, function() {
+            text.animate({opacity: 0}, 800, movieText);
+          });
+        };
+        movieText();
+      });
+    </script>
+  </body>
+</html>
