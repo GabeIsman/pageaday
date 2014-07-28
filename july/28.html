@@ -1,0 +1,63 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #333;
+        font-family: 'Raleway';
+      }
+      .container {
+        position: relative;
+        width: 80%;
+        margin: 10%;
+        text-align: center;
+      }
+      .text {
+        font-size: 16px;
+        color: #696;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="text">
+        Sometimes the world is a deep and miserable abyss. Today is Monday.
+      </span>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var container = $('.container');
+        container.css('margin-top', window.innerHeight / 2 - 72 + "px");
+        var text = $('.text');
+        var enlarge = function(msg, fontSize) {
+          text.text(msg)
+          text.css({fontSize: fontSize});
+        };
+
+        var changes = [
+          _.bind(enlarge, this, 'But I made french toast.', '20px'),
+          _.bind(enlarge, this, 'And ate it with fig jam.', '26px'),
+          _.bind(enlarge, this, 'Missed my bus because I was eating french toast.', '32px'),
+          _.bind(enlarge, this, 'But got to enjoy an iced coffee.', '40px'),
+          _.bind(enlarge, this, 'And NPR just released a new app.', '48px'),
+          _.bind(enlarge, this, 'It is great.', '56px'),
+          _.bind(enlarge, this, 'Mondays are not all bad.', '68px'),
+          _.bind(enlarge, this, 'Just mostly.', '128px'),
+        ];
+
+        _.each(changes, function(fn, index) {
+          setTimeout(fn, 2000 + index * 2000);
+        });
+
+      });
+    </script>
+  </body>
+</html>
