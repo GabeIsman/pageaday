@@ -1,0 +1,85 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background: url('images/eye-up-close.jpg') no-repeat;
+        background-size: cover;
+        font-family: 'Raleway';
+      }
+      .container {
+        width: 80%;
+        margin: 10%;
+        text-align: center;
+      }
+      .text {
+        position: absolute;
+        font-size: 72px;
+        color: #FFF;
+      }
+      .annotation {
+        text-decoration: none;
+      }
+      .annotation:hover {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="text one">WHO</span>
+      <span class="text two">WATCHES</span>
+      <span class="text three">THE</span>
+      <span class="text four">WATCHER</span>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var container = $('.container');
+        var height = window.innerHeight / 2 - 72 + "px";
+        container.css('margin-top', height);
+        var text = $('.text');
+        _.each(text, function(el) {
+          $(el).css({
+            left: (Math.random() * window.innerWidth - 50) + "px",
+            top: (Math.random() * window.innerHeight - 20) + "px"
+          })
+        });
+        var duration = 1500;
+
+        $('.one').animate({
+          left: '50px',
+          top: window.innerHeight / 2 - 72 + "px"
+        }, duration);
+        $('.two').animate({
+          left: '250px',
+          top: window.innerHeight / 2 - 72 + "px"
+        }, duration);
+        $('.three').animate({
+          left: '650px',
+          top: window.innerHeight / 2 - 72 + "px"
+        }, duration);
+        $('.four').animate({
+          left: '850px',
+          top: window.innerHeight / 2 - 72 + "px"
+        }, duration, function() {
+          setTimeout(function() {
+            $('body').css({
+              background: "url('images/watchmen.jpg') no-repeat",
+              backgroundSize: "cover"
+            });
+            container.html('<a class="annotation" href="http://www.nytimes.com/2014/08/01/world/senate-intelligence-commitee-cia-interrogation-report.html">SO FUCKED UP</a>"');
+          }, 1000);
+
+        });
+
+      });
+    </script>
+  </body>
+</html>
