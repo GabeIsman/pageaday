@@ -1,0 +1,68 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #222;
+        font-family: 'Open Sans', sans-serif;
+      }
+      .container {
+        padding: 50px;
+        color: #fff;
+      }
+      .text {
+        font-size: 20px;
+      }
+      .cursor {
+        margin-left: -10px;
+        font-size: 25px;
+      }
+      .blink {
+        transition: opacity 0.1s linear;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <span class="text">
+      </span>
+      <span class="cursor">|</span>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        var text = $('.text');
+        var cursor = $('.cursor');
+
+        setInterval(function() {cursor.toggleClass('blink');}, 400);
+
+        var words = "Sometimes I bottle things up.";
+
+        var index = 0;
+        var typeLetter = function() {
+          text.text(words.slice(0, index+1))
+          index++;
+          var minDelay = 75;
+          if (words[index] == '.') {
+            minDelay = 500;
+          } else if (words[index] == ' ') {
+            minDelay = 125;
+          }
+          var delay = Math.random()*200 + minDelay;
+          setTimeout(typeLetter, delay);
+        }
+
+        setTimeout(typeLetter, 400);
+
+      });
+    </script>
+  </body>
+</html>
