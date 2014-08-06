@@ -1,0 +1,58 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #333;
+        font-family: 'Raleway';
+      }
+      .grid {
+        position: absolute;
+      }
+      .text {
+        text-align: center;
+        position: absolute;
+        font-size: 72px;
+        color: #fff;
+        z-index: 1;
+        opacity: .5;
+        padding-top: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text">
+      The unexpected beauty of simple relationships.
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var body = $('body');
+        var tiles = 21;
+        var tileWidth = window.innerWidth / tiles;
+        var tileHeight = window.innerHeight / tiles;
+        for (var x = 0; x < tiles; x++) {
+          for (var y = 0; y < tiles; y++) {
+            var color = 'rgb(' + Math.floor(x / tiles * 255) + ',' + Math.floor(y / tiles * 255) + ',' + Math.floor(y / tiles * 255) + ')';
+            console.log(color);
+            var tile = $(document.createElement('div'))
+                .css({
+                  left: x * tileWidth + 'px',
+                  top: y * tileHeight + 'px',
+                  width: tileWidth,
+                  height: tileHeight,
+                  backgroundColor: color,
+                }).addClass('grid');
+            body.append(tile);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
