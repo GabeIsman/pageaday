@@ -1,0 +1,82 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #333;
+        font-family: 'Raleway';
+      }
+      .container {
+        margin: auto;
+        margin-top: 200px;
+        min-width: 700px;
+        width: 85%;
+        position: relative;
+      }
+      .bottom, .top, .middle {
+        border: 1px solid #EB9139;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+      }
+      .middle {
+        top: 100px;
+        left: -42px;
+        width: 283px; /* thanks pythagoras */
+      }
+      .bottom {
+        top: 200px;
+      }
+      .bottom, .top {
+        transform: rotate(45deg);
+      }
+      .hexa {
+        display: inline-block;
+        position: relative;
+        width: 300px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hexa">
+        <div class="square top"></div>
+        <div class="square middle"></div>
+        <div class="square bottom"></div>
+      </div>
+      <div class="hexa">
+        <div class="square top"></div>
+        <div class="square middle"></div>
+        <div class="square bottom"></div>
+      </div>
+      <div class="hexa">
+        <div class="square top"></div>
+        <div class="square middle"></div>
+        <div class="square bottom"></div>
+      </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var squares = $('.square');
+        _.each(squares, function(el) {
+          $(el).data('top', $(el).css('top'));
+          $(el).data('left', $(el).css('left'));
+          $(el).animate({
+            top: Math.random() * 1400 - 700 + 'px',
+            left: Math.random() * 1400 - 700 + 'px'
+          }, 3000, function() {
+            debugger;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
