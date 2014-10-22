@@ -1,0 +1,68 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #333;
+        font-family: 'Raleway';
+      }
+      .square {
+        animation-iteration-count: infinite;
+        -webkit-animation-iteration-count: infinite;
+        animation-name: bounce;
+        -webkit-animation-name: bounce;
+        animation-play-state: running;
+        -webkit-animation-play-state: running;
+        animation-timing-function: cubic-bezier(.84,.1,.82,1);
+        -webkit-animation-timing-function: cubic-bezier(.84,.1,.82,1);
+        animation-direction: alternate;
+        -webkit-animation-direction: alternate;
+        display: inline-block;
+      }
+      .pink {
+        background-color: #D4345A;
+        -webkit-animation-duration: 1s;
+      }
+      .lightBlue {
+        background-color: #68ACA5;
+        -webkit-animation-duration: 2s;
+      }
+      .orange {
+        background-color: #EB9139;
+        -webkit-animation-duration: 3s;
+      }
+      .blue {
+        background-color: #3A727F;
+        -webkit-animation-duration: 4s;
+      }
+      .text {
+        bottom: 0;
+        position: absolute;
+        font-size: 150px;
+        color: #eee;
+      }
+      @-webkit-keyframes bounce {
+        from {
+          width: 20%;
+          height: 100%;
+        }
+        to {
+          width: 0px;
+          height: 0px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="orange square"></div>
+    <div class="blue square"></div>
+    <div class="lightBlue square"></div>
+    <div class="pink square"></div>
+    <span class="text">BOUNCY CASTLE</span>
+  </body>
+</html>
