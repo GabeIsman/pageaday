@@ -1,0 +1,81 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #333;
+        font-family: 'Raleway';
+      }
+      .square {
+        width: 400px;
+        height: 400px;
+      }
+      .pink {
+        background-color: #D4345A;
+      }
+      .lightBlue {
+        background-color: #68ACA5;
+      }
+      .orange {
+        background-color: #EB9139;
+      }
+      .blue {
+        background-color: #3A727F;
+      }
+      .text {
+        bottom: 0;
+        position: absolute;
+        font-size: 150px;
+        color: #f0e;
+      }
+      .hex1, .hex2, .hex3 {
+        transition: width .3s linear;
+        overflow: hidden;
+        height: 400px;
+        width: 200px;
+      }
+      .hexagon:hover, .hexagon:hover .hex2, .hexagon:hover .hex3 {
+        width: 280px;
+      }
+      .hex1 {
+        transform: rotate(60deg);
+      }
+      .hex2 {
+        transform: rotate(-120deg);
+      }
+      .hex3 {
+        transform: rotate(60deg);
+      }
+      .hexagon {
+        transition: transform .3s linear;
+        position: absolute;
+        left: calc(50% - 100px);
+      }
+      .hexagon:hover {
+        transform: rotate(360deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hex1 hexagon">
+      <div class="hex2">
+        <div class="hex3">
+          <div class="pink square"></div>
+        </div>
+      </div>
+    </div>
+    <span class="text">SEPTEMBER WAS A LAZY MONTH</span>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.text').on('click', function(event) { $(event.target).css({ color: 'blue' }) });
+      });
+    </script>
+  </body>
+</html>
