@@ -56,14 +56,12 @@
 
         this.maybeRevealLetter(timestamp);
 
-        for (var i = this.revealedIndex; i < this.letters.length; i++) {
-          var letter = this.letters[i];
-          letter.decay();
-
-          if (Math.random() < 0.3) {
-            letter.updateValue(Letter.randomLetter());
-          }
+        var letter = this.letters[this.revealedIndex];
+        letter.decay();
+        if (Math.random() < 0.5) {
+          letter.updateValue(Letter.randomLetter());
         }
+
         if (this.revealedIndex < this.letters.length) {
           window.requestAnimationFrame(_.bind(this.animate, this));
         } else {
