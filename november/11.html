@@ -1,0 +1,113 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        background-color: #222;
+      }
+      #container {
+        position: absolute;
+        width: 100%;
+        font-size: 48px;
+        color: #eee;
+        top: calc(50% - 24px);
+        font-family: 'Raleway';
+        text-align: center;
+      }
+      .letter {
+        width: 40px;
+        display: inline-block;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript">
+      Alphabet = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%&*-+=~'
+
+      Word = function(element) {
+        this.letters = [];
+        this.element = element;
+        // Timestamp
+        this.lastFrame = 0;
+        // Start time
+        this.firstFrame = null;
+        // Millisecs
+        this.duration = 5000;
+        // Target word
+        this.targetWord = '';
+      };
+
+      Word.prototype.animate = function(timestamp) {
+        if (!this.firstFrame) {
+          this.firstFrame = timestamp;
+        }
+        var ended = false;
+        if (timestamp - this.firstFrame > this.duration) {
+          ended = true;
+        }
+
+        _.each(this.letters, function(letter, index) {
+          if (!ended) {
+            letter.decay();
+          }
+          if (Math.random() < 0.05) {
+            if (ended) {
+              letter.updateValue(this.targetWord.charAt(index));
+            } else {
+              letter.updateValue(Letter.randomLetter());
+            }
+          }
+          this.lastFrame = timestamp;
+        }, this);
+        window.requestAnimationFrame(_.bind(this.animate, this));
+      };
+
+      Word.prototype.animateWord = function(word, duration) {
+        this.duration = duration || 5000;
+        this.targetWord = word;
+        for (var i = 0; i < word.length; i++) {
+          var letter = new Letter(Letter.randomLetter());
+          this.letters.push(letter);
+          letter.render(this.element);
+        }
+        window.requestAnimationFrame(_.bind(this.animate, this));
+      };
+
+      Letter = function(value) {
+        this.value = value;
+        this.element = null;
+      };
+
+      Letter.prototype.render = function(container) {
+        var letter = document.createElement('span');
+        letter.className = 'letter';
+        letter.textContent = this.value;
+        container.appendChild(letter);
+        this.element = letter;
+      };
+
+      Letter.prototype.updateValue = function(value) {
+        this.element.textContent = value;
+        this.element.style.opacity = "1.0";
+      };
+
+      Letter.prototype.decay = function() {
+        var currentOpacity = parseFloat(this.element.style.opacity);
+        this.element.style.opacity = "" + (Math.max(currentOpacity * 0.97, .01));
+      };
+
+      Letter.randomLetter = function() {
+        return Alphabet.charAt(Math.floor(Math.random() * Alphabet.length));
+      };
+
+      var container = document.getElementById('container');
+      var word = new Word(container);
+      word.animateWord('The twelfth eye is real.');
+    </script>
+  </body>
+</html>
