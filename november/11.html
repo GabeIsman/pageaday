@@ -11,12 +11,14 @@
         padding: 24px;
         position: absolute;
         width: 100%;
-        font-size: 24px;
+        top: calc(50% - 24px);
+        font-size: 48px;
+        text-align: center;
         color: #beb;
         font-family: 'Ubuntu Mono';
       }
       .letter {
-        width: 10px;
+        width: 23px;
         display: inline-block;
         text-align: center;
         -webkit-transition: opacity 300ms linear;
@@ -56,10 +58,12 @@
 
         this.maybeRevealLetter(timestamp);
 
-        var letter = this.letters[this.revealedIndex];
-        letter.decay();
-        if (Math.random() < 0.5) {
-          letter.updateValue(Letter.randomLetter());
+        for (var i = this.revealedIndex; i < this.letters.length; i++) {
+          var  letter = this.letters[i];
+          letter.decay();
+          if (Math.random() < 0.1) {
+            letter.updateValue(Letter.randomLetter());
+          }
         }
 
         if (this.revealedIndex < this.letters.length) {
@@ -104,6 +108,7 @@
         letter.textContent = this.value;
         container.appendChild(letter);
         this.element = letter;
+        this.decay();
       };
 
       Letter.prototype.updateValue = function(value) {
@@ -114,11 +119,15 @@
       Letter.prototype.fixValue = function(value) {
         this.element.textContent = value;
         this.element.style.opacity = "1.0";
+        this.element.style.transform = "none";
       }
 
       Letter.prototype.decay = function() {
         var currentOpacity = parseFloat(this.element.style.opacity);
-        this.element.style.opacity = currentOpacity * 0.7;
+        this.element.style.opacity = currentOpacity * 0.9;
+        if (Math.random() < 0.5) {
+          this.element.style.transform = "rotateY(180deg)";
+        }
       };
 
       Letter.randomLetter = function() {
@@ -127,7 +136,7 @@
 
       var container = document.getElementById('container');
       var word = new Word(container);
-      word.animateWord('SECRET TOP EYES ONLY', 3000);
+      word.animateWord('THE 12TH EYE IS REAL', 3000);
     </script>
   </body>
 </html>
