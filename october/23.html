@@ -1,0 +1,47 @@
+<!doctype>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,600' rel='stylesheet' type='text/css'>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-image: url(http://upload.wikimedia.org/wikipedia/commons/3/34/Macaca_nigra_self-portrait_%28rotated_and_cropped%29.jpg);
+        background-size: 100%;
+        font-family: 'Raleway', sans-serif;
+
+        animation-iteration-count: infinite;
+        animation-name: scroll_up;
+        animation-play-state: running;
+        animation-timing-function: ease-in;
+        animation-direction: alternate;
+
+        -webkit-animation-iteration-count: infinite;
+
+        -webkit-animation-name: scroll_up;
+
+        -webkit-animation-play-state: running;
+
+        -webkit-animation-timing-function: ease-in;
+
+        -webkit-animation-direction: alternate;
+        -webkit-animation-duration: 5s;
+      }
+
+      @-webkit-keyframes scroll_up {
+        from {}
+
+        to {
+          background-position: 0 -800px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <span class="image">
+
+    </span>
+  </body>
+</html>

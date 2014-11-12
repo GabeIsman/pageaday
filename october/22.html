@@ -11,34 +11,55 @@
         background-color: #333;
         font-family: 'Raleway';
       }
-      .square {
-        animation-iteration-count: infinite;
-        -webkit-animation-iteration-count: infinite;
-        animation-name: bounce;
-        -webkit-animation-name: bounce;
-        animation-play-state: running;
-        -webkit-animation-play-state: running;
-        animation-timing-function: cubic-bezier(.84,.1,.82,1);
-        -webkit-animation-timing-function: cubic-bezier(.84,.1,.82,1);
-        animation-direction: alternate;
-        -webkit-animation-direction: alternate;
-        display: inline-block;
-      }
-      .pink {
+     .square {
+       animation-iteration-count: infinite;
+       -webkit-animation-iteration-count: infinite;
+       animation-name: shrink;
+       -webkit-animation-name: shrink;
+       animation-play-state: running;
+       -webkit-animation-play-state: running;
+       animation-timing-function: cubic-bezier(.84,.1,.82,1);
+       -webkit-animation-timing-function: cubic-bezier(.84,.1,.82,1);
+       animation-direction: alternate;
+       -webkit-animation-direction: alternate;
+       -webkit-animation-duration: 1s;
+       display: inline-block;
+       position: absolute;
+     }
+     .pink {
         background-color: #D4345A;
-        -webkit-animation-duration: 1s;
+        width: 300px;
+        height: 300px;
+        top: calc(50% - 150px);
+        left: calc(50% - 150px);
+        transform: rotate(22.5deg);
+        -webkit-animation: spin 1s cubic-bezier(.84,.1,.82,1) infinite alternate running;
       }
       .lightBlue {
         background-color: #68ACA5;
-        -webkit-animation-duration: 2s;
+        width: 320px;
+        height: 320px;
+        top: calc(50% - 160px);
+        left: calc(50% - 160px);
+        transform: rotate(45deg);
+        -webkit-animation: spin 2s cubic-bezier(.84,.1,.82,1) infinite alternate running;
       }
       .orange {
         background-color: #EB9139;
-        -webkit-animation-duration: 3s;
+        width: 380px;
+        height: 380px;
+        top: calc(50% - 190px);
+        left: calc(50% - 190px);
+        transform: rotate(67.5deg);
+        -webkit-animation: spin 3s cubic-bezier(.84,.1,.82,1) infinite alternate running;
       }
       .blue {
         background-color: #3A727F;
-        -webkit-animation-duration: 4s;
+        width: 440px;
+        height: 440px;
+        top: calc(50% - 220px);
+        left: calc(50% - 220px);
+        -webkit-animation: spin 4s cubic-bezier(.84,.1,.82,1) infinite alternate running;
       }
       .text {
         bottom: 0;
@@ -46,23 +67,36 @@
         font-size: 150px;
         color: #eee;
       }
-      @-webkit-keyframes bounce {
-        from {
-          width: 20%;
-          height: 100%;
+      @-webkit-keyframes shrink {
+        0% {
+
         }
-        to {
-          width: 0px;
-          height: 0px;
+        /*50% {
+          transform: rotate(45deg);
+        }*/
+        100% {
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+        }
+      }
+      @-webkit-keyframes spin {
+        0% {}
+        100% {
+          transform: rotate(360deg);
         }
       }
     </style>
   </head>
   <body>
-    <div class="orange square"></div>
+
+
+
     <div class="blue square"></div>
+    <div class="orange square"></div>
     <div class="lightBlue square"></div>
     <div class="pink square"></div>
-    <span class="text">BOUNCY CASTLE</span>
+
   </body>
 </html>
