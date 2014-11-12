@@ -1,24 +1,26 @@
 <!doctype>
 <html>
   <head>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
     <style>
       body {
-        background-color: #222;
+        background-color: #070707;
       }
       #container {
+        box-sizing: border-box;
+        padding: 24px;
         position: absolute;
         width: 100%;
-        font-size: 48px;
-        color: #eee;
-        top: calc(50% - 24px);
-        font-family: 'Raleway';
-        text-align: center;
+        font-size: 24px;
+        color: #beb;
+        font-family: 'Ubuntu Mono';
       }
       .letter {
-        width: 40px;
+        width: 10px;
         display: inline-block;
         text-align: center;
+        -webkit-transition: opacity 300ms linear;
+        transition: opacity 300ms linear;
       }
     </style>
   </head>
@@ -27,44 +29,46 @@
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script type="text/javascript">
-      Alphabet = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%&*-+=~'
+      Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*-+=~';
 
       Word = function(element) {
         this.letters = [];
         this.element = element;
-        // Timestamp
-        this.lastFrame = 0;
         // Start time
         this.firstFrame = null;
         // Millisecs
         this.duration = 5000;
         // Target word
         this.targetWord = '';
+        // The furthest index revealed
+        this.revealedIndex = 0;
       };
 
       Word.prototype.animate = function(timestamp) {
         if (!this.firstFrame) {
           this.firstFrame = timestamp;
         }
+
         var ended = false;
         if (timestamp - this.firstFrame > this.duration) {
           ended = true;
         }
 
-        _.each(this.letters, function(letter, index) {
-          if (!ended) {
-            letter.decay();
+        this.maybeRevealLetter(timestamp);
+
+        for (var i = this.revealedIndex; i < this.letters.length; i++) {
+          var letter = this.letters[i];
+          letter.decay();
+
+          if (Math.random() < 0.3) {
+            letter.updateValue(Letter.randomLetter());
           }
-          if (Math.random() < 0.05) {
-            if (ended) {
-              letter.updateValue(this.targetWord.charAt(index));
-            } else {
-              letter.updateValue(Letter.randomLetter());
-            }
-          }
-          this.lastFrame = timestamp;
-        }, this);
-        window.requestAnimationFrame(_.bind(this.animate, this));
+        }
+        if (this.revealedIndex < this.letters.length) {
+          window.requestAnimationFrame(_.bind(this.animate, this));
+        } else {
+          // this.dispatchAnimationEnd()
+        }
       };
 
       Word.prototype.animateWord = function(word, duration) {
@@ -77,6 +81,19 @@
         }
         window.requestAnimationFrame(_.bind(this.animate, this));
       };
+
+      Word.prototype.maybeRevealLetter = function(timestamp) {
+        var timeBetweenLetters = this.duration / this.letters.length;
+        var time = timestamp - this.firstFrame;
+        var expectedNumRevealed = time / timeBetweenLetters;
+        var chanceToReveal = (expectedNumRevealed - this.revealedIndex) * 0.01
+
+        if (Math.random() < chanceToReveal)  {
+          var numberToReveal = this.letters[this.revealedIndex];
+          numberToReveal.fixValue(this.targetWord.charAt(this.revealedIndex));
+          this.revealedIndex++;
+        }
+      }
 
       Letter = function(value) {
         this.value = value;
@@ -96,9 +113,14 @@
         this.element.style.opacity = "1.0";
       };
 
+      Letter.prototype.fixValue = function(value) {
+        this.element.textContent = value;
+        this.element.style.opacity = "1.0";
+      }
+
       Letter.prototype.decay = function() {
         var currentOpacity = parseFloat(this.element.style.opacity);
-        this.element.style.opacity = "" + (Math.max(currentOpacity * 0.97, .01));
+        this.element.style.opacity = currentOpacity * 0.7;
       };
 
       Letter.randomLetter = function() {
@@ -107,7 +129,7 @@
 
       var container = document.getElementById('container');
       var word = new Word(container);
-      word.animateWord('The twelfth eye is real.');
+      word.animateWord('SECRET TOP EYES ONLY', 3000);
     </script>
   </body>
 </html>
