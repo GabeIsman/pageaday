@@ -17,7 +17,6 @@
         text-align: center;
         color: #beb;
         font-family: 'Ubuntu Mono';
-        /*transform: rotateY(180deg);*/
       }
       .letter {
         color: transparent;
@@ -73,13 +72,15 @@
         if (this.revealedIndex < this.letters.length) {
           window.requestAnimationFrame(_.bind(this.animate, this));
         } else {
-          // this.dispatchAnimationEnd()
-          // this.element.style.transform = "none";
+          if (this.callback) {
+            this.callback();
+          }
         }
       };
 
-      Word.prototype.animateWord = function(word, duration) {
-        this.duration = duration || 5000;
+      Word.prototype.animateWord = function(word, opt_callback, opt_duration) {
+        this.duration = opt_duration || 5000;
+        this.callback = opt_callback;
         this.targetWord = word;
         for (var i = 0; i < word.length; i++) {
           var letter = new Letter(Letter.randomLetter());
@@ -145,7 +146,7 @@
 
       var container = document.getElementById('container');
       var word = new Word(container);
-      word.animateWord('THE 12TH EYE IS REAL', 3000);
+      word.animateWord('THE 12TH EYE IS REAL');
     </script>
   </body>
 </html>
